@@ -62,16 +62,16 @@ async def health():
 
 @app.get("/api/version")
 async def api_version():
-    info = obtener_info_proyecto("2EC64B23030546FB")
-    return {"version":"1.0.0","proyecto":info.get("Nombre","hermes-fabrica-01"),"correlationId":"2EC64B23030546FB"}
+    info = obtener_info_proyecto("E5E54032F78D4E7D")
+    return {"version":"1.0.0","proyecto":info.get("Nombre","hermes-fabrica-01"),"correlationId":"E5E54032F78D4E7D"}
 
 @app.get("/api/proyecto")
 async def api_proyecto():
-    return obtener_info_proyecto("2EC64B23030546FB")
+    return obtener_info_proyecto("E5E54032F78D4E7D")
 
 @app.get("/api/workspace")
 async def api_workspace():
-    p = obtener_info_proyecto("2EC64B23030546FB")
+    p = obtener_info_proyecto("E5E54032F78D4E7D")
     workspace = Path(PROJECT_ROOT).parent / (p.get("Nombre","hermes-fabrica-01") + ".code-workspace")
     return {"workspace":str(workspace),"exists":workspace.exists()}
 
@@ -82,7 +82,7 @@ async def api_git():
 
 @app.get("/api/github")
 async def api_github():
-    info = obtener_info_proyecto("2EC64B23030546FB")
+    info = obtener_info_proyecto("E5E54032F78D4E7D")
     return {"repo":info.get("Repositorio",""),"status":info.get("EstadoGitHub","")}
 
 @app.get("/api/sqlite")
@@ -91,23 +91,23 @@ async def api_sqlite():
 
 @app.get("/api/azure")
 async def api_azure():
-    info = obtener_info_proyecto("2EC64B23030546FB")
+    info = obtener_info_proyecto("E5E54032F78D4E7D")
     return {"webapp":"as-hermesfabrica01","url":"https://as-hermesfabrica01.azurewebsites.net","status":info.get("EstadoAzure","")}
 
 @app.get("/api/despliegue")
 async def api_despliegue():
-    info = obtener_info_proyecto("2EC64B23030546FB")
+    info = obtener_info_proyecto("E5E54032F78D4E7D")
     return {"estado":info.get("Estado",""),"total_commits":0,"total_deploys":0,"total_corrections":0}
 
 @app.get("/", response_class=HTMLResponse)
 async def landing(request: Request):
     # ── Read real data from SQLite ──
-    corr_id = "2EC64B23030546FB"
+    corr_id = "E5E54032F78D4E7D"
     project_name = "hermes-fabrica-01"
     webapp_name = "as-hermesfabrica01"
     region = "eastus"
     runtime = "Python 3.12"
-    deployment_id = "2EC64B23030546FB"
+    deployment_id = "E5E54032F78D4E7D"
 
     info = obtener_info_proyecto(corr_id)
     timeline = obtener_timeline(corr_id)
