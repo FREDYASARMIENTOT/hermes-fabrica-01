@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Os
+.DS_Store
+Thumbs.db
+
+# Project
+logs/
+reports/
+data/*.db
+*.zip
+*.tar.gz
+
+# Deployment
+deploy/
+deploy_pkg_deploy/
+
+# Environment
+.env
+.env.local
+*.env

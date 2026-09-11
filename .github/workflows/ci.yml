@@ -1,0 +1,37 @@
+# ====================================================================
+# CI Pipeline - hermes-fabrica-01
+# ====================================================================
+# Template RC77-C6
+# ====================================================================
+
+name: CI - hermes-fabrica-01
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-python:
+    name: Validate Python
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - run: python -c "import fastapi; print('FastAPI OK')"
+
+  validate-actions:
+    name: Validate Actions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: pip install pyyaml -q 2>/dev/null; python -c "import os,yaml; [print('OK:',f) for f in ['.github/workflows/ci.yml','.github/workflows/deploy.yml'] if os.path.exists(f) and yaml.safe_load(open(f)) and 'jobs' in yaml.safe_load(open(f))]"
+
